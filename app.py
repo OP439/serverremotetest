@@ -2,9 +2,15 @@ from flask import Flask, request, jsonify, redirect, flash, render_template
 from flask_mqtt import Mqtt
 from flask_socketio import SocketIO
 import ssl
+#from werkzeug.middleware.proxy_fix import ProxyFix
+
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+#app.wsgi_app = ProxyFix(
+#	app.wsgi_app, x_for=1, x_host=1
+#)
 
 # app.config['MQTT_BROKER_URL'] = 'oppi1.local'
 # app.config['MQTT_BROKER_PORT'] = 1883
@@ -84,5 +90,5 @@ def hello_world():
 
 if __name__ == '__main__':
    app.run(host='0.0.0.0', port=5023, use_reloader="False", ssl_context='adhoc')
-
+#formerly just app not app.wsgi_app
 
