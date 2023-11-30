@@ -64,11 +64,11 @@ mqtt_client = Mqtt(app)
 #    print('ehthefd')
 
 ### Test route
-@app.route('/publish', methods=['POST'])
-def publish_message():
-   request_data = request.get_json()
-   publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
-   return jsonify({'code': publish_result[0]})
+# @app.route('/publish', methods=['POST'])
+# def publish_message():
+#    request_data = request.get_json()
+#    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
+#    return jsonify({'code': publish_result[0]})
 
 
 
@@ -77,22 +77,25 @@ def publish_message():
 @app.route('/toggleheater', methods=['GET'])
 def publish_message_2():
    publish_result = mqtt_client.publish('toggleheaterflask', 'toggleheaterflask')#mqtt specifc, must be kept
-   flash('Heater toggled (hopefully) - monitor temperatures, wait for acknowledge')
    with open("templates/logs.txt", "a") as file1:
       # Writing data to a file
-      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggled \n")
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggle Command \n")
    return redirect('/')
 
 @app.route('/rotateprinter', methods=['GET'])
 def publish_message_3():
    publish_result = mqtt_client.publish('rotateprinterflask', 'rotateprinterflask')#mqtt specifc, must be kept
-   flash('Printer rotated (hopefully) - monitor position on graphs, wait for acknowledge')
+   with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Printer Rotate Command \n")
    return redirect('/')
 
 @app.route('/takepicture', methods=['GET'])
 def publish_message_4():
    publish_result = mqtt_client.publish('takepictureflask', 'takepictureflask')#mqtt specifc, must be kept
-   flash('Picture taken (hopefully) - monitor datetime below picture, wait for acknowledge')
+   with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Take Picture Command \n")
    return redirect('/')
 
 ### Routes to handle incoming requests from AWS IoT core
@@ -100,9 +103,24 @@ def publish_message_4():
 ### Also used to get latest picture from S3 bucket
 @app.route('/toggleheaterack', methods=['GET'])
 def toggleheaterackfn():
-   flash('Heater Toggle Command Acknowledged by Local Pi - continue to monitor temps')
+   with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggle Command Acknowledged \n")
    return redirect('/')
 
+@app.route('/rotateprinterack', methods=['GET'])
+def rotateprinterackfn():
+   with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Printer Rotate Command Acknowledged \n")
+   return redirect('/')
+
+@app.route('/takepictureack', methods=['GET'])
+def takepictureackfn():
+   with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Take Picture Command Acknowledged \n")
+   return redirect('/')
 
 
 

@@ -6,3 +6,9 @@ Hello
 2023-11-30 18:03:07.793221Hello 
 2023-11-30 18:04:05.683419 Heater Toggled 
 2023-11-30 18:04:11.602587 Heater Toggled 
+2023-11-30 18:10:56.521206 Heater Toggle Command 
+2023-11-30 18:11:04.737620 Take Picture Command 
+2023-11-30 18:11:12.137524 Printer Rotate Command 
+2023-11-30 18:54:25.939806 Take Picture Command Acknowledged 
+2023-11-30 18:54:36.808929 Heater Toggle Command Acknowledged 
+2023-11-30 18:54:52.895537 Printer Rotate Command Acknowledged 
