@@ -92,7 +92,7 @@ def publish_message_4():
 ### Routes to handle incoming requests from AWS IoT core
 ### Local server acknowlodging message received 
 ### Also used to get latest picture from S3 bucket
-@app.route('/toggleheater', methods=['GET'])
+@app.route('/toggleheaterack', methods=['GET'])
 def publish_message_2():
    flash('Heater Toggle Command Acknowledged by Local Pi - continue to monitor temps')
    return redirect('/')
