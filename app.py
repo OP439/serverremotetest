@@ -75,7 +75,7 @@ def publish_message():
 def publish_message_2():
    publish_result = mqtt_client.publish('toggleheaterflask', 'toggleheaterflask')#mqtt specifc, must be kept
    flash('Heater toggled (hopefully) - monitor temperatures, wait for acknowledge')
-   with open("logs.txt", "w") as file1:
+   with open("logs.txt", "a") as file1:
       # Writing data to a file
       file1.write("Hello \n")
    return redirect('/')
