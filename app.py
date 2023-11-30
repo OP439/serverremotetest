@@ -33,38 +33,44 @@ mqtt_client = Mqtt(app)
 
 # @socketio.on('publish')
 
-@mqtt_client.on_connect()
-def handle_connect(client, userdata, flags, rc):
-   mqtt_client.subscribe('toggleheaterackflask')
-   mqtt_client.subscribe('rotateprinterackflask')
-   mqtt_client.subscribe('takepictureackflask')
+### Getting runtime errors when trying to process information coming in as an MQTT message with HTTPS stuff
+### MQTT is translated into HTTPS by the AWS IoT Core upstream instead.
 
-@mqtt_client.on_message()
-def handle_mqtt_message(client, userdata, message):
-   if message.topic == 'toggleheaterackflask':
-      #flash('Heater toggle command acknowledged in lab - still monitor temps!')
-      #print(payload)
-      print('heeh')
-      # socketio.emit('incomeing', data='mqtttoflask')
-   elif message.topic == 'rotateprinterackflask':
-      flash('Rotate printer command acknowledged in lab - monitor rotation graph')
-   elif message.topic == 'takepictureackflask':
-      flash('Take picture command acknowledged in lab - may take time to upload')
-      payload = message.payload.decode()
-      print(payload)
+# @mqtt_client.on_connect()
+# def handle_connect(client, userdata, flags, rc):
+#    mqtt_client.subscribe('toggleheaterackflask')
+#    mqtt_client.subscribe('rotateprinterackflask')
+#    mqtt_client.subscribe('takepictureackflask')
+
+# @mqtt_client.on_message()
+# def handle_mqtt_message(client, userdata, message):
+#    if message.topic == 'toggleheaterackflask':
+#       #flash('Heater toggle command acknowledged in lab - still monitor temps!')
+#       #print(payload)
+#       print('heeh')
+#       # socketio.emit('incomeing', data='mqtttoflask')
+#    elif message.topic == 'rotateprinterackflask':
+#       flash('Rotate printer command acknowledged in lab - monitor rotation graph')
+#    elif message.topic == 'takepictureackflask':
+#       flash('Take picture command acknowledged in lab - may take time to upload')
+#       payload = message.payload.decode()
+#       print(payload)
 
 # @socketio.on('incomeing')
 # def publish_message_6():
 #    flash('heel')
 #    print('ehthefd')
 
-#test route
+### Test route
 @app.route('/publish', methods=['POST'])
 def publish_message():
    request_data = request.get_json()
    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
    return jsonify({'code': publish_result[0]})
 
+
+
+### Routes to handle outgoing messages from the server to AWS IoT Core
 @app.route('/toggleheater', methods=['GET'])
 def publish_message_2():
    publish_result = mqtt_client.publish('toggleheaterflask', 'toggleheaterflask')#mqtt specifc, must be kept
@@ -83,6 +89,19 @@ def publish_message_4():
    flash('Picture taken (hopefully) - monitor datetime below picture, wait for acknowledge')
    return redirect('/')
 
+### Routes to handle incoming requests from AWS IoT core
+### Local server acknowlodging message received 
+### Also used to get latest picture from S3 bucket
+@app.route('/toggleheater', methods=['GET'])
+def publish_message_2():
+   flash('Heater Toggle Command Acknowledged by Local Pi - continue to monitor temps')
+   return redirect('/')
+
+
+
+
+
+### Base Welcome Route
 @app.route("/")
 def hello_world():
     return render_template('index.html')
