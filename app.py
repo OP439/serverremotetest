@@ -71,6 +71,19 @@ mqtt_client = Mqtt(app)
 #    return jsonify({'code': publish_result[0]})
 
 
+### URL confirmation route for AWS MQTT HTTPS Translator
+@app.route('/confirmURL', methods=['POST'])
+def publish_message():
+   print(dict(request.headers))
+   request_data = request.get_json()
+   print(request_data)
+   with open("templates/pythonlogs.txt", "a") as file1:
+      # Writing data to a file
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+str(request.headers))
+   #publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
+   return 4
+
+
 
 
 ### Routes to handle outgoing messages from the server to AWS IoT Core
