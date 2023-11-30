@@ -72,7 +72,7 @@ mqtt_client = Mqtt(app)
 
 
 ### URL confirmation route for AWS MQTT HTTPS Translator
-@app.route('/confirmURL', methods=['POST'])
+@app.route('/', methods=['POST'])
 def publish_message():
    print(dict(request.headers))
    request_data = request.get_json()
