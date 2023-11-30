@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, redirect, flash, render_template
 from flask_mqtt import Mqtt
 from flask_socketio import SocketIO
 import ssl
+import time
+import datetime
 #from werkzeug.middleware.proxy_fix import ProxyFix
 
 
@@ -70,14 +72,15 @@ def publish_message():
 
 
 
+
 ### Routes to handle outgoing messages from the server to AWS IoT Core
 @app.route('/toggleheater', methods=['GET'])
 def publish_message_2():
    publish_result = mqtt_client.publish('toggleheaterflask', 'toggleheaterflask')#mqtt specifc, must be kept
    flash('Heater toggled (hopefully) - monitor temperatures, wait for acknowledge')
-   with open("logs.txt", "a") as file1:
+   with open("templates/logs.txt", "a") as file1:
       # Writing data to a file
-      file1.write("Hello \n")
+      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggled \n")
    return redirect('/')
 
 @app.route('/rotateprinter', methods=['GET'])
@@ -107,7 +110,11 @@ def toggleheaterackfn():
 ### Base Welcome Route
 @app.route("/")
 def hello_world():
-    return render_template('index.html')
+    ### testing text
+
+   f = open('templates/logs.txt', 'r')
+   g = f.readlines()[-10:][::-1]#reverse list order so most recent is first
+   return render_template('index.html', n=g)
 
 
 if __name__ == '__main__':
