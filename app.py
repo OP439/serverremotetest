@@ -51,9 +51,6 @@ def handle_mqtt_message(client, userdata, message):
       #flash('Heater toggle command acknowledged in lab - still monitor temps!')
       #print(payload)
       print('heeh')
-      with open("templates/logs.txt", "a") as file1:
-      # Writing data to a file
-         file1.write("_")
       with open("templates/logs.txt", "w") as file1:
       # Writing data to a file
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Toggle Heater Command Acknowledged \n")
@@ -105,6 +102,9 @@ def publish_message_2():
    with open("templates/logs.txt", "a") as file1:
       # Writing data to a file
       file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggle Command \n")
+   with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+      file1.write("_")
    return redirect('/')
 
 @app.route('/rotateprinter', methods=['GET'])
