@@ -172,7 +172,7 @@ def hello_world():
    #photo filename
    f3 = open('templates/picturefilename.txt', 'r')
    g3 = f3.readlines()[-1][:-1]#ignore the escpae n for new line
-   g31 = "\"https://oppiphotos.s3.amazonaws.com/dump/file/"+g3+"\""
+   g31 = "https://oppiphotos.s3.amazonaws.com/dump/file/"+g3
 
    return render_template('index.html', n=g ,n2=g2, n3=g31)
 
