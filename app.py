@@ -171,7 +171,7 @@ def hello_world():
    g2 = f2.readlines()[-1:]
    #photo filename
    f3 = open('templates/picturefilename.txt', 'r')
-   g3 = f3.readlines()[-1][:-2]#ignore the escpae n for new line
+   g3 = f3.readlines()[-1][:-1]#ignore the escpae n for new line
 
    return render_template('index.html', n=g ,n2=g2, n3=g3)
 
