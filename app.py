@@ -71,6 +71,7 @@ def handle_mqtt_message(client, userdata, message):
       with open("templates/picturefilename.txt", "a") as file2:
       # Writing data to a file
          file2.write(str(payload)+"\n")
+         file2.write(json.loads(str(payload))+'\n')
    return redirect('/')
 
 
@@ -169,10 +170,10 @@ def hello_world():
    f2 = open('templates/incominglogs.txt', 'r')
    g2 = f2.readlines()[-1:]
    #photo filename
-   f3 = open('templates/picturefilename.txt', 'r')
-   g3 = str(json.loads(f3.readlines()[-1])["takepictureack"])
+   #f3 = open('templates/picturefilename.txt', 'r')
+   #g3 = str(json.loads(f3.readlines()[-1])["takepictureack"])
 
-   return render_template('index.html', n=g ,n2=g2, n3=g3)
+   return render_template('index.html', n=g ,n2=g2, n3='hi')
 
 
 if __name__ == '__main__':
