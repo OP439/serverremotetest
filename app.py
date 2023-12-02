@@ -67,9 +67,9 @@ def handle_mqtt_message(client, userdata, message):
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Take Picture Command Acknowledged \n")
       #### Write to a file the file name of the photo most recently taken
       payload = message.payload.decode()
-      with open("templates/pythonlogs.txt", "a") as file1:
+      with open("templates/pythonlogs.txt", "a") as file2:
       # Writing data to a file
-         file1.write(str(datetime.datetime.fromtimestamp(time.time()))+str(payload['takepictureack'])+"\n")
+         file2.write(str(datetime.datetime.fromtimestamp(time.time()))+str(payload['takepictureack'])+"\n")
 
    return redirect('/')
 
