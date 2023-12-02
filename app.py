@@ -62,9 +62,14 @@ def handle_mqtt_message(client, userdata, message):
       # Writing data to a file
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Rotate Printer Command Acknowledged \n")
    elif message.topic == 'takepictureackflask':
-      #flash('Take picture command acknowledged in lab - may take time to upload')
+      with open("templates/incominglogs.txt", "a") as file1:
+      # Writing data to a file
+         file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Take Picture Command Acknowledged \n")
+      #### Write to a file the file name of the photo most recently taken
       payload = message.payload.decode()
-      print(payload)
+      with open("templates/pythonlogs.txt", "a") as file1:
+      # Writing data to a file
+         file1.write(str(payload))
    return redirect('/')
 
 
