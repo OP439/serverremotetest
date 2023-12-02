@@ -38,25 +38,33 @@ mqtt_client = Mqtt(app)
 ### Getting runtime errors when trying to process information coming in as an MQTT message with HTTPS stuff
 ### MQTT is translated into HTTPS by the AWS IoT Core upstream instead.
 
-# @mqtt_client.on_connect()
-# def handle_connect(client, userdata, flags, rc):
-#    mqtt_client.subscribe('toggleheaterackflask')
-#    mqtt_client.subscribe('rotateprinterackflask')
-#    mqtt_client.subscribe('takepictureackflask')
+@mqtt_client.on_connect()
+def handle_connect(client, userdata, flags, rc):
+   mqtt_client.subscribe('toggleheaterackflask')
+   mqtt_client.subscribe('rotateprinterackflask')
+   mqtt_client.subscribe('takepictureackflask')
 
-# @mqtt_client.on_message()
-# def handle_mqtt_message(client, userdata, message):
-#    if message.topic == 'toggleheaterackflask':
-#       #flash('Heater toggle command acknowledged in lab - still monitor temps!')
-#       #print(payload)
-#       print('heeh')
-#       # socketio.emit('incomeing', data='mqtttoflask')
-#    elif message.topic == 'rotateprinterackflask':
-#       flash('Rotate printer command acknowledged in lab - monitor rotation graph')
-#    elif message.topic == 'takepictureackflask':
-#       flash('Take picture command acknowledged in lab - may take time to upload')
-#       payload = message.payload.decode()
-#       print(payload)
+@mqtt_client.on_message()
+def handle_mqtt_message(client, userdata, message):
+
+   if message.topic == 'toggleheaterackflask':
+      #flash('Heater toggle command acknowledged in lab - still monitor temps!')
+      #print(payload)
+      print('heeh')
+      with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+         file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Toggle Heater Command Acknowledged \n")
+      # socketio.emit('incomeing', data='mqtttoflask')
+   elif message.topic == 'rotateprinterackflask':
+      print('rotateprinterack')
+      with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+         file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Rotate Printer Command Acknowledged \n")
+   elif message.topic == 'takepictureackflask':
+      #flash('Take picture command acknowledged in lab - may take time to upload')
+      payload = message.payload.decode()
+      print(payload)
+   return redirect('/')
 
 # @socketio.on('incomeing')
 # def publish_message_6():
@@ -72,16 +80,16 @@ mqtt_client = Mqtt(app)
 
 
 ### URL confirmation route for AWS MQTT HTTPS Translator
-@app.route('/', methods=['POST'])
-def publish_message():
-   print(dict(request.headers))
-   request_data = request.get_json()
-   print(request_data)
-   with open("templates/pythonlogs.txt", "a") as file1:
-      # Writing data to a file
-      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+str(request.headers))
-   #publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
-   return 4
+# @app.route('/', methods=['POST'])
+# def publish_message():
+#    print(dict(request.headers))
+#    request_data = request.get_json()
+#    print(request_data)
+#    with open("templates/pythonlogs.txt", "a") as file1:
+#       # Writing data to a file
+#       file1.write(str(datetime.datetime.fromtimestamp(time.time()))+str(request.headers))
+#    #publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
+#    return 4
 
 
 
@@ -114,26 +122,27 @@ def publish_message_4():
 ### Routes to handle incoming requests from AWS IoT core
 ### Local server acknowlodging message received 
 ### Also used to get latest picture from S3 bucket
-@app.route('/toggleheaterack', methods=['GET'])
-def toggleheaterackfn():
-   with open("templates/logs.txt", "a") as file1:
-      # Writing data to a file
-      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggle Command Acknowledged \n")
-   return redirect('/')
+### Too difficult to handle with confirming ownership of url - mqtt writing to file works better
+# @app.route('/toggleheaterack', methods=['GET'])
+# def toggleheaterackfn():
+#    with open("templates/logs.txt", "a") as file1:
+#       # Writing data to a file
+#       file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggle Command Acknowledged \n")
+#    return redirect('/')
 
-@app.route('/rotateprinterack', methods=['GET'])
-def rotateprinterackfn():
-   with open("templates/logs.txt", "a") as file1:
-      # Writing data to a file
-      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Printer Rotate Command Acknowledged \n")
-   return redirect('/')
+# @app.route('/rotateprinterack', methods=['GET'])
+# def rotateprinterackfn():
+#    with open("templates/logs.txt", "a") as file1:
+#       # Writing data to a file
+#       file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Printer Rotate Command Acknowledged \n")
+#    return redirect('/')
 
-@app.route('/takepictureack', methods=['GET'])
-def takepictureackfn():
-   with open("templates/logs.txt", "a") as file1:
-      # Writing data to a file
-      file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Take Picture Command Acknowledged \n")
-   return redirect('/')
+# @app.route('/takepictureack', methods=['GET'])
+# def takepictureackfn():
+#    with open("templates/logs.txt", "a") as file1:
+#       # Writing data to a file
+#       file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Take Picture Command Acknowledged \n")
+#    return redirect('/')
 
 
 

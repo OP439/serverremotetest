@@ -1,0 +1,7 @@
+2023-11-30 19:33:52.525956User-Agent: vscode-restclient
+Content-Type: application/json
+Accept-Encoding: gzip, deflate
+Content-Length: 72
+Host: 192.168.1.27:5023
+Connection: close
+

@@ -12,3 +12,29 @@ Hello
 2023-11-30 18:54:25.939806 Take Picture Command Acknowledged 
 2023-11-30 18:54:36.808929 Heater Toggle Command Acknowledged 
 2023-11-30 18:54:52.895537 Printer Rotate Command Acknowledged 
+2023-11-30 19:42:28.455106 Toggle Heater Acked 
+2023-11-30 19:56:07.188388 Toggle Heater Acked 
+2023-11-30 19:56:07.188390 Toggle Heater Acked 
+2023-11-30 20:14:49.686626 Toggle Heater Acked 
+2023-11-30 20:14:49.686624 Toggle Heater Acked 
+2023-11-30 20:16:43.471758 Toggle Heater Acked 
+2023-11-30 20:16:43.471757 Toggle Heater Acked 
+2023-11-30 20:19:47.412253 Toggle Heater Acked 
+2023-11-30 20:20:38.145539 Toggle Heater Acked 
+2023-11-30 20:20:38.145589 Toggle Heater Acked 
+2023-11-30 20:20:50.122924 Toggle Heater Acked 
+2023-11-30 20:20:50.122923 Toggle Heater Acked 
+2023-11-30 20:22:48.337682 Toggle Heater Acked 
+2023-11-30 20:22:48.339271 Rotate Printer Command Acknowledged 
+2023-11-30 20:23:50.140091 Toggle Heater Acked 
+2023-11-30 20:23:50.140098 Rotate Printer Command Acknowledged 
+2023-11-30 20:23:50.169026 Toggle Heater Acked 
+2023-11-30 20:23:50.171967 Rotate Printer Command Acknowledged 
+2023-11-30 20:23:50.302980 Toggle Heater Acked 
+2023-11-30 20:23:50.309136 Rotate Printer Command Acknowledged 
+2023-11-30 20:30:01.437874 Toggle Heater Acked 
+2023-11-30 20:30:01.438093 Toggle Heater Command Acknowledged 
+2023-11-30 20:32:19.270160 Toggle Heater Acked 
+2023-11-30 20:32:19.270178 Toggle Heater Command Acknowledged 
+2023-11-30 20:40:20.442937 Rotate Printer Command Acknowledged 
+2023-11-30 20:40:20.442936 Toggle Heater Acked 
