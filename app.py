@@ -71,7 +71,7 @@ def handle_mqtt_message(client, userdata, message):
       with open("templates/picturefilename.txt", "a") as file2:
       # Writing data to a file
          file2.write(str(payload)+"\n")
-         file2.write(json.loads(str(payload))['takepictureack']+'fg \n')
+         file2.write(str(json.loads(str(payload))['takepictureack'])+'fg \n')
    return redirect('/')
 
 
