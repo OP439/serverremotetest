@@ -46,15 +46,15 @@ def handle_connect(client, userdata, flags, rc):
 
 @mqtt_client.on_message()
 def handle_mqtt_message(client, userdata, message):
-   with open("templates/logs.txt", "a") as file1:
-   # Writing data to a file
-      file1.write(str(message))
 
    if message.topic == 'toggleheaterackflask':
       #flash('Heater toggle command acknowledged in lab - still monitor temps!')
       #print(payload)
       print('heeh')
       with open("templates/logs.txt", "a") as file1:
+      # Writing data to a file
+         file1.write("_")
+      with open("templates/logs.txt", "w") as file1:
       # Writing data to a file
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Toggle Heater Command Acknowledged \n")
       # socketio.emit('incomeing', data='mqtttoflask')
