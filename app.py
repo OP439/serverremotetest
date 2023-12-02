@@ -55,6 +55,7 @@ def handle_mqtt_message(client, userdata, message):
       # Writing data to a file
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Toggle Heater Command Acknowledged \n")
       # socketio.emit('incomeing', data='mqtttoflask')
+      time.sleep(1)
    elif message.topic == 'rotateprinterackflask':
       print('rotateprinterack')
       with open("templates/logs.txt", "a") as file1:
