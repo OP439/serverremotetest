@@ -51,14 +51,14 @@ def handle_mqtt_message(client, userdata, message):
       #flash('Heater toggle command acknowledged in lab - still monitor temps!')
       #print(payload)
       print('heeh')
-      with open("templates/logs.txt", "w") as file1:
+      with open("templates/incominglogs.txt", "a") as file1:
       # Writing data to a file
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Toggle Heater Command Acknowledged \n")
       # socketio.emit('incomeing', data='mqtttoflask')
       time.sleep(1)
    elif message.topic == 'rotateprinterackflask':
       print('rotateprinterack')
-      with open("templates/logs.txt", "a") as file1:
+      with open("templates/incominglogs.txt", "a") as file1:
       # Writing data to a file
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Rotate Printer Command Acknowledged \n")
    elif message.topic == 'takepictureackflask':
@@ -157,8 +157,12 @@ def hello_world():
     ### testing text
 
    f = open('templates/logs.txt', 'r')
-   g = f.readlines()[-10:][::-1]#reverse list order so most recent is first
-   return render_template('index.html', n=g)
+   g = f.readlines()[-1:]#reverse list order so most recent is first
+
+   f2 = open('templates/incominglogs.txt', 'r')
+   g2 = f2.readlines()[-1:]
+
+   return render_template('index.html', n=g, n2=g2)
 
 
 if __name__ == '__main__':
