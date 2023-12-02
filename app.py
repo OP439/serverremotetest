@@ -67,6 +67,10 @@ def handle_mqtt_message(client, userdata, message):
       print(payload)
    return redirect('/')
 
+
+
+
+
 # @socketio.on('incomeing')
 # def publish_message_6():
 #    flash('heel')
@@ -102,9 +106,6 @@ def publish_message_2():
    with open("templates/logs.txt", "a") as file1:
       # Writing data to a file
       file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Heater Toggle Command \n")
-   with open("templates/logs.txt", "a") as file1:
-      # Writing data to a file
-      file1.write("_")
    return redirect('/')
 
 @app.route('/rotateprinter', methods=['GET'])
@@ -157,12 +158,12 @@ def hello_world():
     ### testing text
 
    f = open('templates/logs.txt', 'r')
-   g = f.readlines()[-1:]#reverse list order so most recent is first
+   g = f.readlines()[-1:]
 
    f2 = open('templates/incominglogs.txt', 'r')
    g2 = f2.readlines()[-1:]
 
-   return render_template('index.html', n=g, n2=g2)
+   return render_template('index.html', n=g ,n2=g2)
 
 
 if __name__ == '__main__':
