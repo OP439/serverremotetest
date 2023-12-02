@@ -4,6 +4,7 @@ from flask_socketio import SocketIO
 import ssl
 import time
 import datetime
+import json
 #from werkzeug.middleware.proxy_fix import ProxyFix
 
 
@@ -67,10 +68,9 @@ def handle_mqtt_message(client, userdata, message):
          file1.write(str(datetime.datetime.fromtimestamp(time.time()))+" Take Picture Command Acknowledged \n")
       #### Write to a file the file name of the photo most recently taken
       payload = message.payload.decode()
-      with open("templates/pythonlogs.txt", "a") as file2:
+      with open("templates/picturefilename.txt", "a") as file2:
       # Writing data to a file
-         file2.write(str(datetime.datetime.fromtimestamp(time.time()))+str(type(payload))+"\n")
-
+         file2.write(str(payload)+"\n")
    return redirect('/')
 
 
@@ -162,14 +162,17 @@ def publish_message_4():
 @app.route("/")
 def hello_world():
     ### testing text
-
+   #outgoing logs
    f = open('templates/logs.txt', 'r')
    g = f.readlines()[-1:]
-
+   #incoming logs
    f2 = open('templates/incominglogs.txt', 'r')
    g2 = f2.readlines()[-1:]
+   #photo filename
+   f3 = open('templates/picturefilename.txt', 'r')
+   g3 = str(json.loads(f3.readlines()[-1])["takepictureack"])
 
-   return render_template('index.html', n=g ,n2=g2)
+   return render_template('index.html', n=g ,n2=g2, n3=g3)
 
 
 if __name__ == '__main__':
