@@ -69,7 +69,8 @@ def handle_mqtt_message(client, userdata, message):
       payload = message.payload.decode()
       with open("templates/pythonlogs.txt", "a") as file1:
       # Writing data to a file
-         file1.write(str(payload))
+         file1.write(str(payload['takepictureack'])+"\n")
+
    return redirect('/')
 
 
