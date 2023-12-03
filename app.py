@@ -165,7 +165,7 @@ def timetonextfromscript():
    readable_time = datetime.datetime.fromtimestamp(datetimeatnext)
    with open("templates/timetonext.txt", "a") as file1:
       # Writing data to a file
-      file1.write(str(readable_time)+'\n')
+      file1.write(str(readable_time)+' \n')
    return redirect('/')
 
 
