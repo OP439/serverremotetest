@@ -150,9 +150,9 @@
       <div class="container-fluid py-5">
         <div class="row">
             <div class="col">
-                <h1 class="display-5 fw-bold">Custom jumbotron</h1>
-                <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-                <button class="btn btn-outline-secondary" type="button">Example button</button>
+                <h1 class="display-5 fw-bold">Take Picture</h1>
+                <p class="col-md-8 fs-4">Press this button to take a picture of the current state of the experiment. Do not spam as camera has a bootup time. If running auto-script, make sure command will not conflict.</p>
+                <a href="/takepicture"><button class="btn btn-outline-secondary" type="button">Take Picture</button></a>
             </div>
             <div class="col"><img src={{n3}} class='img-fluid rounded-3' alt="test photo below"></div>
         </div>
@@ -163,16 +163,16 @@
     <div class="row align-items-md-stretch">
         <div class="col-md-6">
             <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-              <h2>Add borders</h2>
-              <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-              <button class="btn btn-outline-secondary" type="button">Example button</button>
+              <h2>Toggle Heater</h2>
+              <p>Toggle Heater button - use with caution. Mechanical system toggling is prone to failure. Ensure to monitor top left graph for temperature change. Decrease in temps will lag due to sensor heating up. Don't trust acknowledge alone.</p>
+              <a href="/toggleprinter"><button class="btn btn-outline-secondary" type="button">Toggle Heater</button></a>
             </div>
           </div>
       <div class="col-md-6">
         <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-          <h2>Add borders</h2>
-          <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-          <a href="/toggleheater"><button class="btn btn-outline-secondary" type="button">Toggle Heater</button></a>
+          <h2>Rotate Printer</h2> 
+          <p>Rotates printer which causes silicone to flow. If running in manual mode, you will need to take pictures every 5 seconds with the take picture button - not recommended. 5 rotations possible in one experiment.</p>
+          <a href="/rotateprinter"><button class="btn btn-outline-secondary" type="button">Rotate Printer</button></a>
         </div>
       </div>
     </div>
