@@ -157,6 +157,16 @@ def publish_message_4():
 #    return redirect('/')
 
 
+### Route to communicate with the script that is running tests automatically
+@app.route('/autotimer')
+def timetonextfromscript():
+   timetonext_sec = float(request.args.get('timetonext'))
+   datetimeatnext = time.time() + timetonext_sec
+   readable_time = datetime.datetime.fromtimestamp(datetimeatnext)
+   with open("templates/timetonext.txt", "a") as file1:
+      # Writing data to a file
+      file1.write(str(readable_time))
+   return redirect('/')
 
 
 ### Base Welcome Route
@@ -174,7 +184,10 @@ def hello_world():
    g3 = f3.readlines()[-1][:-1]#ignore the escpae n for new line
    g31 = "https://oppiphotos.s3.amazonaws.com/dump/file/"+g3
 
-   return render_template('index.html', n=g ,n2=g2, n3=g31)
+   f4 = open('templates/timetonext.txt', 'r')
+   g4 = f4.readlines()[-1]   
+
+   return render_template('index.html', n=g ,n2=g2, n3=g31, n4=g4)
 
 
 if __name__ == '__main__':
